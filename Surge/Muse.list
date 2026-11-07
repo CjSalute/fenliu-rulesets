@@ -1,0 +1,16 @@
+#!name=Muse (Meta)
+#!desc=Meta Muse 个人 AI Agent（muse.ai）分流规则集
+#!type=domain
+#!author=CjSalute
+
+DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,museai.com
+DOMAIN-SUFFIX,api.muse.ai
+DOMAIN-SUFFIX,voice.museai.com
+DOMAIN,agent.meta.ai
+DOMAIN,hatch.meta.ai
+DOMAIN-SUFFIX,hatch.club
+DOMAIN-SUFFIX,ecto1.ai
+DOMAIN-SUFFIX,auth.meta.com
+DOMAIN-SUFFIX,accountscenter.meta.com
+DOMAIN-SUFFIX,nest-static.fbcdn.net
