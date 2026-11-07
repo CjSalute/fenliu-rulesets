@@ -1,0 +1,52 @@
+name: Sync upstream ios_rule_script
+
+# 每日自动同步上游 blackmatrix7/ios_rule_script master 分支内容
+# 规则：只覆盖 / 新增上游同名文件，不删除本仓库独有文件，跳过 README.md（本仓库自有说明）
+on:
+  schedule:
+    - cron: '0 19 * * *' # UTC 19:00 = 北京时间 03:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Fetch upstream master
+        run: |
+          set -euo pipefail
+          git remote add upstream https://github.com/blackmatrix7/ios_rule_script.git || true
+          git fetch --depth=1 --no-tags upstream master
+
+      - name: Apply upstream files (keep local-only files and local README.md)
+        run: |
+          set -euo pipefail
+          # 用上游同路径文件覆盖/新增，README.md 排除在外，本地独有文件不受影响
+          git checkout FETCH_HEAD -- . ':(exclude)README.md'
+          # 上游 README 单独另存
+          git show FETCH_HEAD:README.md > README.upstream.md
+
+      - name: Commit and push if changed
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "上游无变更，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: 同步上游 blackmatrix7/ios_rule_script $(date -u +%Y-%m-%d)"
+          git push origin HEAD:${{ github.ref_name }}
