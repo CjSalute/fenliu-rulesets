@@ -119,6 +119,58 @@ https://cdn.jsdelivr.net/gh/CjSalute/fenliu-rulesets@main/Surge/Rulesets/AI.list
 - 新增 Muse (Meta) 分流规则集
 - 新增 Surge 配置模板
 
+## 上游内容（blackmatrix7/ios_rule_script）
+
+本仓库在原有 Surge 规则集之外，**整体移植**了 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) `master` 分支的全部内容（原样保留，未作改写），许可证为 **GPL-2.0**（见 `LICENSE`）。上游 README 全文见 [`README.upstream.md`](README.upstream.md)。
+
+### 目录对应
+
+| 目录 | 内容 | 文件数 |
+|---|---:|---:|
+| `rule/` | 分流规则（Surge / Clash / Quantumult X / Loon / Shadowrocket 等多格式） | 8844 |
+| `rewrite/` | 复写规则（Rewrite / URL Rewrite） | 111 |
+| `script/` | 自动化脚本（MagicJS 2/3、Quantumult X Gallery、BoxJS 订阅） | 173 |
+| `source/` | 规则源文件 | 38 |
+| `external/` | 第三方整合资源 | 60 |
+| `icon/` | 策略组图标 | 1990 |
+| `blank/` | Banner / 空白资源 | 8 |
+| `Surge/` | **本仓库原有**自包含规则集与配置模板（未受上游影响） | 57 |
+
+### 常用入口（指向本仓库）
+
+```
+分流规则目录   https://github.com/CjSalute/fenliu-rulesets/tree/main/rule
+复写规则目录   https://github.com/CjSalute/fenliu-rulesets/tree/main/rewrite
+脚本目录       https://github.com/CjSalute/fenliu-rulesets/tree/main/script
+BoxJS 订阅     https://raw.githubusercontent.com/CjSalute/fenliu-rulesets/main/script/boxjs.json
+QX Gallery     https://raw.githubusercontent.com/CjSalute/fenliu-rulesets/main/script/gallery.json
+```
+
+### 上游主要脚本（框架：MagicJS）
+
+| 脚本 | 介绍 | 框架 | 维护状态 |
+|---|---|---|---|
+| 什么值得买 | 任务与去广告 | MagicJS 2/3 | 正常 |
+| 百度贴吧 | 带重试功能的贴吧签到 | MagicJS 3 | 正常 |
+| 开屏去广告 | 去除缓存到本地的 APP 开屏广告 | MagicJS 3 | 正常 |
+| 慢慢买 | 每日自动签到 | MagicJS 2 | 正常 |
+| 叮咚买菜 | 每日自动签到 | MagicJS 3 | 正常 |
+| Fa米家 | 每日自动签到 | MagicJS 2 | 正常 |
+| Luka | 每日自动签到 | MagicJS 2 | 正常 |
+| 哲也同学 | 之乎者也 | MagicJS 3 | 正常 |
+| Synology | 群晖 Download Station 资源离线下载 | MagicJS 3 | 正常 |
+| AppleStore | AppleStore 商品库存监控 | MagicJS 3 | 暂停 |
+
+### 上游声明（摘录，全文见 `README.upstream.md`）
+
+- 本项目内所有资源文件，禁止任何公众号、自媒体进行任何形式的转载、发布。
+- 所有内容只供学习和研究使用（上游原文要求 24 小时内完成学习研究并及时删除），不得用于违反国家/地区/组织法律法规的用途。
+- 规则与脚本数据均来自互联网开源项目，版权归原作者所有；因使用本项目内容造成的一切后果由使用者自行承担。
+
+### 同步方式
+
+启用 `.github/workflows/sync-upstream.yml`（每日定时 + 支持手动 `Run workflow`）后会自动拉取上游 `master` 变更：只覆盖/新增上游同名文件、继承上游新增文件，**不删除**本地独有文件，并跳过本文件 `README.md`，上游 README 同步到 `README.upstream.md`。
+
 ---
 
 > 规则仅供个人网络配置使用，请遵守当地法律法规。
